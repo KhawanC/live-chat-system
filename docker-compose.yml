@@ -1,0 +1,33 @@
+version: '3.9'
+services:
+  node-client:
+    build:
+      context: .
+      target: node-image
+    container_name: node-client
+    ports:
+      - "3000:3000"
+    networks:
+      - chat-server
+    deploy:
+      resources:
+        limits:
+          memory: 1024M
+
+  java-client:
+    build:
+      context: .
+      target: java-image
+    container_name: java-client
+    ports:
+      - "8080:8080"
+    networks:
+      - chat-server
+    deploy:
+      resources:
+        limits:
+          memory: 1024M
+
+networks:
+  chat-server:
+    driver: bridge
